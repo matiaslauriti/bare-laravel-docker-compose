@@ -1,0 +1,34 @@
+version: '3.9'
+
+services:
+  app:
+    build: .
+    working_dir: /var/www
+    volumes:
+      - ${WORKING_DIR:-./src}:/var/www
+      - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+      - ./docker/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+    environment:
+        PHP_IDE_CONFIG: "serverName=localhost"
+    depends_on:
+      - mysql
+      - nginx
+
+  mysql:
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+        MYSQL_DATABASE: '${DB:-app}'
+        MYSQL_ROOT_PASSWORD: '${PASS:-root}'
+    volumes:
+      - ./docker/mysql_data:/var/lib/mysql
+    ports:
+      - "${DB_PORT:-33006}:3306"
+
+  nginx:
+    image: nginx:alpine
+    volumes:
+      - ${WORKING_DIR:-./src}:/var/www
+      - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
+    ports:
+      - "${NGINX_PORT:-8080}:80"
