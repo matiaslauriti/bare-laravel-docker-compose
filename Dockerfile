@@ -21,8 +21,7 @@ RUN docker-php-ext-install pdo_mysql exif pcntl gd
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Install latest xDebug
-RUN pecl install xdebug \
-    && docker-php-ext-enable xdebug
+RUN pecl install xdebug
 
 # Clean
 RUN apt-get -y autoremove \
