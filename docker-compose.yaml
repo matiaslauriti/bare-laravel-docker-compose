@@ -2,7 +2,11 @@ version: '3.9'
 
 services:
   app:
-    build: .
+    build:
+      context: .
+      args:
+        PHP_VERSION: ${PHP_VERSION}
+        XDEBUG_VERSION: ${XDEBUG_VERSION}
     working_dir: /var/www
     volumes:
       - ${WORKING_DIR:-./src}:/var/www

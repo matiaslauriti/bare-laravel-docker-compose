@@ -1,4 +1,6 @@
-FROM php:8.0-fpm
+ARG PHP_VERSION=8.0
+
+FROM php:${PHP_VERSION}-fpm
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
@@ -21,7 +23,8 @@ RUN docker-php-ext-install pdo_mysql exif pcntl gd
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Install latest xDebug
-RUN pecl install xdebug
+ARG XDEBUG_VERSION
+RUN pecl install xdebug${XDEBUG_VERSION}
 
 # Clean
 RUN apt-get -y autoremove \
