@@ -9,15 +9,16 @@ RUN apt-get update && apt-get install -y \
     libjpeg62-turbo-dev \
     libfreetype6-dev \
     locales \
+    libzip-dev \
     zip \
+    unzip \
     jpegoptim optipng pngquant gifsicle \
     vim \
-    unzip \
     git \
     curl
 
 # Install extensions
-RUN docker-php-ext-install pdo_mysql exif pcntl gd
+RUN docker-php-ext-install pdo_mysql exif pcntl gd zip
 
 # Install composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
