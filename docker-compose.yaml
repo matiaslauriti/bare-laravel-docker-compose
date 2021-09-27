@@ -2,7 +2,11 @@ version: '3.9'
 
 services:
   app:
-    build: .
+    build:
+      context: .
+      args:
+        PHP_VERSION: ${PHP_VERSION}
+        XDEBUG_VERSION: ${XDEBUG_VERSION}
     working_dir: /var/www
     volumes:
       - ${WORKING_DIR:-./src}:/var/www
@@ -22,13 +26,14 @@ services:
         MYSQL_ROOT_PASSWORD: '${PASS:-root}'
     volumes:
       - ./docker/mysql_data:/var/lib/mysql
+      - ./docker/mysql:/docker-entrypoint-initdb.d
     ports:
-      - "${DB_PORT:-33006}:3306"
+      - "${DB_PORT:-3306}:3306"
 
   nginx:
     image: nginx:alpine
     volumes:
       - ${WORKING_DIR:-./src}:/var/www
-      - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d
     ports:
-      - "${NGINX_PORT:-8080}:80"
+      - "${NGINX_PORT:-80}:80"
