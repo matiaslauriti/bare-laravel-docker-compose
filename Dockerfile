@@ -31,6 +31,14 @@ RUN pecl install xdebug${XDEBUG_VERSION}
 RUN apt-get -y autoremove \
     && apt-get clean
 
+ARG WWWUSER
+ARG WWWGROUP
+
+RUN groupadd --force -g $WWWGROUP sail
+RUN useradd -ms /bin/bash --no-user-group -g $WWWGROUP -u $WWWUSER sail
+
+USER $WWWUSER:$WWWGROUP
+
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000
 
