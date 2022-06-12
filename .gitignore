@@ -1,7 +1,6 @@
 .env
 
-# JetBrains IDE
 .idea/
 
-docker/mysql_data
+docker/mysql_data/
 src/
