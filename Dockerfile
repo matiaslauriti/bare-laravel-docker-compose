@@ -1,4 +1,4 @@
-ARG PHP_VERSION=8.0
+ARG PHP_VERSION=8.1
 
 FROM php:${PHP_VERSION}-fpm
 
@@ -39,7 +39,6 @@ RUN useradd -ms /bin/bash --no-user-group -g $WWWGROUP -u $WWWUSER sail
 
 USER $WWWUSER:$WWWGROUP
 
-# Expose port 9000 and start php-fpm server
 EXPOSE 9000
 
 CMD ["php-fpm"]

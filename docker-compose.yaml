@@ -24,8 +24,8 @@ services:
     image: mysql:latest
     command: --default-authentication-plugin=mysql_native_password
     environment:
-        MYSQL_DATABASE: '${DB:-app}'
-        MYSQL_ROOT_PASSWORD: '${PASS:-root}'
+        MYSQL_DATABASE: "${DB:-app}"
+        MYSQL_ALLOW_EMPTY_PASSWORD: "Yes"
     volumes:
       - ./docker/mysql_data:/var/lib/mysql
       - ./docker/mysql:/docker-entrypoint-initdb.d
