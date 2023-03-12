@@ -1,4 +1,4 @@
-ARG PHP_VERSION=8.1
+ARG PHP_VERSION
 
 FROM php:${PHP_VERSION}-fpm
 
@@ -20,12 +20,18 @@ RUN apt-get update && apt-get install -y \
 # Install extensions
 RUN docker-php-ext-install pdo_mysql exif pcntl gd zip
 
-# Install composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
 # Install latest xDebug
 ARG XDEBUG_VERSION
 RUN pecl install xdebug${XDEBUG_VERSION}
+
+# Install Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Install NodeJS/NPM/Yarn
+RUN curl -sL https://deb.nodesource.com/setup_lts.x | bash - \
+  && apt-get install -y nodejs \
+  && curl -L https://www.npmjs.com/install.sh | sh \
+  && npm install -g yarn
 
 # Clean
 RUN apt-get -y autoremove \

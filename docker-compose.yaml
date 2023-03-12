@@ -7,8 +7,8 @@ services:
       args:
         WWWUSER: ${WWWUSER:-1000}
         WWWGROUP: ${WWWGROUP:-1000}
-        PHP_VERSION: ${PHP_VERSION}
-        XDEBUG_VERSION: ${XDEBUG_VERSION}
+        PHP_VERSION: ${PHP_VERSION:-8.2}
+        XDEBUG_VERSION: ${XDEBUG_VERSION:-}
     working_dir: /var/www
     volumes:
       - ${WORKING_DIR:-./src}:/var/www
