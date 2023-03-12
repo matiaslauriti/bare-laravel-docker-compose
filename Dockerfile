@@ -40,8 +40,8 @@ RUN apt-get -y autoremove \
 ARG WWWUSER
 ARG WWWGROUP
 
-RUN groupadd --force -g $WWWGROUP sail
-RUN useradd -ms /bin/bash --no-user-group -g $WWWGROUP -u $WWWUSER sail
+RUN groupadd --force -g $WWWGROUP main
+RUN useradd -ms /bin/bash --no-user-group -g $WWWGROUP -u $WWWUSER main
 
 USER $WWWUSER:$WWWGROUP
 
