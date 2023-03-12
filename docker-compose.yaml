@@ -7,9 +7,8 @@ services:
       args:
         WWWUSER: ${WWWUSER:-1000}
         WWWGROUP: ${WWWGROUP:-1000}
-        PHP_VERSION: ${PHP_VERSION:-8.1}
+        PHP_VERSION: ${PHP_VERSION:-8.2}
         XDEBUG_VERSION: ${XDEBUG_VERSION:-}
-    working_dir: /var/www
     volumes:
       - ${WORKING_DIR:-./src}:/var/www
       - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
