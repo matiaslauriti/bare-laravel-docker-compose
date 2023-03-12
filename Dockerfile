@@ -47,4 +47,6 @@ USER $WWWUSER:$WWWGROUP
 
 EXPOSE 9000
 
+WORKDIR /var/www
+
 CMD ["php-fpm"]
