@@ -20,10 +20,10 @@ services:
 
   mysql:
     image: mysql:latest
-    command: --default-authentication-plugin=mysql_native_password
     environment:
         MYSQL_DATABASE: ${DB:-app}
-        MYSQL_ALLOW_EMPTY_PASSWORD: Yes
+        MYSQL_ALLOW_EMPTY_PASSWORD: yes
+        MYSQL_DEFAULT_AUTH: mysql_native_password
     volumes:
       - ./docker/mysql_data:/var/lib/mysql
       - ./docker/mysql:/docker-entrypoint-initdb.d
