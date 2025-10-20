@@ -24,6 +24,9 @@ RUN docker-php-ext-install pdo_mysql exif pcntl gd zip
 ARG XDEBUG_VERSION
 RUN pecl install xdebug${XDEBUG_VERSION}
 
+# Install Redis client
+RUN pecl install redis && docker-php-ext-enable redis
+
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
